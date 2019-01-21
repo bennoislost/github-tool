@@ -22,6 +22,46 @@ class ApiServiceProvider
         $this->client = $client;
     }
 
+    public function createMilestone(Organization $organization, Repository $repository, $title, $description)
+    {
+        return $this->client
+            ->api('issue')
+            ->milestones()
+            ->create(
+                $organization->asString(),
+                $repository->asString(),
+                [
+                    'title'       => $title,
+                    'description' => $description
+                ]
+            );
+
+    }
+
+    public function createRelease(
+        Organization $organization,
+        Repository $repository,
+        $tag,
+        $title,
+        $body,
+        $preRelease = true,
+        $draft = true
+    ) {
+        return $this->client->api('repo')
+            ->releases()
+            ->create(
+                $organization->asString(),
+                $repository->asString(),
+                [
+                    'tag_name'   => $tag,
+                    'name'       => $title,
+                    'body'       => $body,
+                    'draft'      => $draft,
+                    'prerelease' => $preRelease
+                ]
+            );
+    }
+
     public function milestones(Organization $organization, Repository $repository)
     {
         return $this->client

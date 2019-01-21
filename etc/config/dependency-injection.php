@@ -16,6 +16,12 @@ $container['github_api_service_provider'] = function ($c) {
 
 $container['cli_app_commands'] = function ($c) {
     return [
+        new \Bennoislost\GitHubTool\GitHub\Create\MilestoneCommand(
+            $c['github_api_service_provider']
+        ),
+        new \Bennoislost\GitHubTool\GitHub\Create\ReleaseCommand(
+            $c['github_api_service_provider']
+        ),
         new \Bennoislost\GitHubTool\GitHub\Milestones\FromRepositoryCommand(
             $c['github_api_service_provider']
         ),
