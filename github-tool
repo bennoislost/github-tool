@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -eu
+
+RUN_WRAPPER="docker-compose exec app"
+
+if [[ "$#" -ge 1 ]] && [[ "$1" == "bash" ]]; then
+    # shellcheck disable=SC2086
+    exec ${RUN_WRAPPER} "$@"
+else
+    # shellcheck disable=SC2086
+    exec ${RUN_WRAPPER} ./bin/github-tool "$@"
+fi

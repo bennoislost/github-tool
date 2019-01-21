@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+foreach (['../../../autoload.php', '../vendor/autoload.php', 'vendor/autoload.php'] as $file) {
+    if (file_exists(__DIR__ . '/' . $file)) {
+        require __DIR__ . '/' . $file;
+        unset($file);
+        break;
+    }
+}
+
+$container = new Pimple\Container;
+$container->register(new \Bennoislost\GitHubTool\DependencyInjection\ConfigProvider, [
+    'config.files' => [
+        __DIR__ . '/../etc/config/dependency-injection.php',
+    ]
+]);
+$container['config.hydrate']($container);
+
+$container['cli_app']->run();

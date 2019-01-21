@@ -1,0 +1,35 @@
+{
+    "name": "bennoislost/github-tool",
+    "description": "View branches associated to PRs in a milestone",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "php-http/guzzle6-adapter": "^1.1",
+        "knplabs/github-api": "^2.7",
+        "pimple/pimple": "^3.2",
+        "symfony/console": "^4.1",
+        "cakephp/collection": "^3.6"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^5.0",
+        "squizlabs/php_codesniffer": "@stable",
+        "friendsofphp/php-cs-fixer": "^2.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bennoislost\\": "src/Bennoislost/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "bin": [
+        "bin/github-tool"
+    ],
+    "scripts": {
+        "test:spec": "./bin/phpspec run --no-code-generation --stop-on-failure --format=pretty",
+        "test:beauty": "./bin/php-cs-fixer fix src/ --dry-run",
+        "test:sniff": "./bin/phpcs --standard=PSR2 src/"
+    }
+}
