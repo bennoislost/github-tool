@@ -47,11 +47,14 @@ class FromRepositoryCommand extends Command
         );
 
         $collection = (new Collection($prs))->map(function($value, $key) {
+            $milestone = ($value['milestone'] !== null) ? $value['milestone']['title'] : "None";
+
             $columns = [
                 $value['number'],
                 $value['title'],
                 $value['user']['login'],
-                $value['head']['ref']
+                $value['head']['ref'],
+                $milestone
             ];
 
             $labelsString = '';
@@ -76,7 +79,7 @@ class FromRepositoryCommand extends Command
         array_pop($result);
 
         (new Table($output))
-            ->setHeaders(['Number', 'Title', 'Author', 'Branch'])
+            ->setHeaders(['Number', 'Title', 'Author', 'Branch', 'Milestone'])
             ->setRows($result)
             ->render();
     }
