@@ -94,5 +94,30 @@ class ApiServiceProvider
             );
     }
 
+    public function createReference(Organization $organization, Repository $repository, $reference, $sha)
+    {
+        return $this->client
+            ->api('gitData')
+            ->references()
+            ->create(
+                $organization->asString(),
+                $repository->asString(),
+                [
+                    'ref' => $reference,
+                    'sha' => $sha
+                ]
+            );
+    }
 
+    public function reference(Organization $organization, Repository $repository, $reference)
+    {
+        return $this->client
+            ->api('gitData')
+            ->references()
+            ->show(
+                $organization->asString(),
+                $repository->asString(),
+                $reference
+            );
+    }
 }

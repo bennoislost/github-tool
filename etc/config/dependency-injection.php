@@ -22,6 +22,9 @@ $container['cli_app_commands'] = function ($c) {
         new \Bennoislost\GitHubTool\GitHub\Create\ReleaseCommand(
             $c['github_api_service_provider']
         ),
+        new \Bennoislost\GitHubTool\GitHub\Create\ReleaseBranchCommand(
+            $c['github_api_service_provider']
+        ),
         new \Bennoislost\GitHubTool\GitHub\Milestones\FromRepositoryCommand(
             $c['github_api_service_provider']
         ),
@@ -31,7 +34,6 @@ $container['cli_app_commands'] = function ($c) {
         new \Bennoislost\GitHubTool\GitHub\Releases\FromRepositoryCommand(
             $c['github_api_service_provider']
         )
-
     ];
 };
 
